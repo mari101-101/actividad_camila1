@@ -1,6 +1,10 @@
 package com.sena.actividad_camila.servicesImplement;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
+
 import org.springframework.stereotype.Service;
 import com.sena.actividad_camila.dtos.UsuarioDto;
 import com.sena.actividad_camila.mappers.UsuarioMapper;
@@ -21,6 +25,12 @@ public class UsuarioServicesImpl implements UsuarioService {
                 Usuario usuario = usuarioMapper.convierteaEntidad(usuarioDto);
                 Usuario usuarioGuardado = usuarioRepository.save(usuario);
                 return usuarioMapper.convierteaDto(usuarioGuardado);
+        }
+
+        public List<UsuarioDto> ListarTodos() {
+                return usuarioRepository.findAll().stream()
+                        .map(usuarioMapper::convierteaDto)
+                        .toList();
         }
 
 }
