@@ -1,6 +1,7 @@
 package com.sena.actividad_camila.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,4 +40,18 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioDto>> listarTodos() {
         return ResponseEntity.ok(usuarioServices.ListarTodos());
     }
+
+    //consultar usuario por id
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDto> consultarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioServices.consultarPorId(id));
+    }
+    
+    //consutar por post
+    @PostMapping("/buscar")
+    public ResponseEntity<UsuarioDto> consultarPorIdPost(@RequestBody UsuarioDto usuarioDto) {
+        UsuarioDto encontrado = usuarioServices.consultarPorId(usuarioDto.getId());
+        return ResponseEntity.ok(encontrado);
+    }
+    
 }

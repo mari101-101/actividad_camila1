@@ -2,6 +2,7 @@ package com.sena.actividad_camila.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sena.actividad_camila.dtos.UsuarioDto;
 import com.sena.actividad_camila.models.usuarios.Usuario;
@@ -24,5 +25,7 @@ public interface UsuarioMapper {
     @Mapping (source = "direc", target = "dir")
     @Mapping (source = "tele", target = "tel")
     Usuario convierteaEntidad(UsuarioDto usuarioDto);
+
+
 }
 

@@ -12,6 +12,8 @@ import com.sena.actividad_camila.models.usuarios.Usuario;
 import com.sena.actividad_camila.repositoryes.UsuarioRepository; 
 import com.sena.actividad_camila.services.UsuarioService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 @RequiredArgsConstructor 
@@ -27,10 +29,19 @@ public class UsuarioServicesImpl implements UsuarioService {
                 return usuarioMapper.convierteaDto(usuarioGuardado);
         }
 
+        @Override
         public List<UsuarioDto> ListarTodos() {
                 return usuarioRepository.findAll().stream()
                         .map(usuarioMapper::convierteaDto)
                         .toList();
         }
 
+        @Override
+        public UsuarioDto consultarPorId(Long id) {
+                Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id)
+                );
+                return usuarioMapper.convierteaDto(usuario);
+        }
+ 
 }

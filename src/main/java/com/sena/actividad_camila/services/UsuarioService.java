@@ -12,4 +12,9 @@ public interface UsuarioService {
         //listar todos los usuarios
         List<UsuarioDto> ListarTodos();
 
+        //consultar usuario por id
+        UsuarioDto consultarPorId(Long id);
+        
+
+
 }
